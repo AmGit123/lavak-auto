@@ -1,0 +1,23 @@
+.plan-card__pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex: none;
+}
+
+.plan-card__old-price {
+  color: #6f7d8c;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration-color: #e32636;
+  text-decoration-thickness: 0.18rem;
+}
+
+@media (max-width: 480px) {
+  .plan-card__old-price {
+    font-size: 1.3rem;
+  }
+}
