@@ -2,6 +2,12 @@ import { env } from "cloudflare:workers";
 
 type ReviewInput = { name?: unknown; customerType?: unknown; companyName?: unknown; rating?: unknown; message?: unknown };
 
+const googleReviewDates: Record<string, string> = {
+  "Willy Halley": "2026-09-08T12:00:00.000Z",
+  "Alexandra Ameline": "2026-09-06T12:00:00.000Z",
+  "Gabin Merle": "2026-08-26T12:00:00.000Z",
+};
+
 async function ensureSchema() {
   await env.DB.prepare(`CREATE TABLE IF NOT EXISTS reviews (
     id TEXT PRIMARY KEY,
@@ -17,7 +23,18 @@ async function ensureSchema() {
 export async function GET() {
   await ensureSchema();
   const result = await env.DB.prepare("SELECT id, name, customer_type AS customerType, company_name AS companyName, rating, message, created_at AS createdAt FROM reviews ORDER BY created_at DESC LIMIT 200").all();
-  return Response.json(result.results);
+  const reviews = result.results
+    .map((review) => ({
+      ...review,
+      createdAt:
+        googleReviewDates[String(review.name)] ?? String(review.createdAt),
+    }))
+    .sort(
+      (first, second) =>
+        new Date(String(second.createdAt)).getTime() -
+        new Date(String(first.createdAt)).getTime(),
+    );
+  return Response.json(reviews);
 }
 
 export async function POST(request: Request) {
