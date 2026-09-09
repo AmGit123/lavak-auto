@@ -6,6 +6,63 @@
   flex: none;
 }
 
+.plans__promotion {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  color: #fff;
+  background: linear-gradient(105deg, #e61938 0%, #ff553c 100%);
+  border-radius: 1rem;
+  box-shadow: 0 0.75rem 2rem rgba(230, 25, 56, 0.18);
+}
+
+.plans__promotion strong,
+.plans__promotion small {
+  display: block;
+}
+
+.plans__promotion strong {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.55rem;
+  line-height: 1;
+  letter-spacing: 0.015em;
+}
+
+.plans__promotion small {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.plans__promotion-icon {
+  position: relative;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  border: 0.13rem solid currentColor;
+  border-radius: 0.22rem;
+}
+
+.plans__promotion-icon::before {
+  content: "";
+  position: absolute;
+  top: 0.28rem;
+  left: 0;
+  width: 100%;
+  border-top: 0.13rem solid currentColor;
+}
+
+.plans__promotion-icon::after {
+  content: "••";
+  position: absolute;
+  top: -0.65rem;
+  left: 0.1rem;
+  font-size: 1rem;
+  letter-spacing: 0.18rem;
+}
+
 .plan-card__old-price {
   color: #6f7d8c;
   font-family: "Barlow Condensed", sans-serif;
@@ -17,6 +74,22 @@
 }
 
 @media (max-width: 480px) {
+  .plans__promotion {
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.8rem;
+  }
+
+  .plans__promotion strong {
+    font-size: 1.35rem;
+  }
+
+  .plans__promotion small {
+    font-size: 0.8rem;
+  }
+
   .plan-card__old-price {
     font-size: 1.3rem;
   }
